@@ -8,4 +8,10 @@ app.use(express.json({ limit: '1mb'}));
 app.post('/api', (request, response) => {
     console.log('ello I received a request');
     console.log(request);
+    // const data = request.body;
+    response.json({
+        status: 'success',
+        latitude: request.body.lat,
+        longitude: request.body.lon
+    });
 });
