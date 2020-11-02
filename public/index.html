@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </script>
+    <title>Foo app</title>
+</head>
+<body>
+
+    <!-- ideally this would be in it's own file  -->
+<script>
+        if ('geolocation' in navigator) {
+            console.log('geolocation available');
+            navigator.geolocation.getCurrentPosition(position => {
+                const locale = { latitude, longitude } = position.coords;
+                const lat = locale.latitude;
+                const lon = locale.longitude;
+
+                // set data w/in DOM
+                document.getElementById('latitude').textContent = lat;
+                document.getElementById('longitude').textContent = lon;
+
+                const data = { lat, lon }; 
+                const options = {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type':'application/json'
+                    },
+                    body: JSON.stringify(data)
+                };
+                fetch('/api', options);
+            });
+        } else {
+            console.log('geolocation not available');
+        }
+</script>
+
+    <h1>Data Selfie App</h1>
+
+    <p>
+        latitude  : <span id='latitude'></span>&deg; <br />
+        longitude : <span id='longitude'></span>&deg;
+    </p>
+
+</body>
+</html>
